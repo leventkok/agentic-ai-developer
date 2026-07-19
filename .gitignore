@@ -1,0 +1,13 @@
+# Logs
+*.log
+
+# Environment secrets — never commit these
+.env
+
+# Temporary files
+*.tmp
+temp/
+
+# OS files
+.DS_Store
+Thumbs.db
