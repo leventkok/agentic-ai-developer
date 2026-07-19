@@ -1,3 +1,3 @@
 # Agentic AI Developer
 
-Learning project for building AI agents.
+Learning project for building agentic AI agents and practicing Git.
