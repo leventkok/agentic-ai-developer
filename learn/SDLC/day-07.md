@@ -1,0 +1,71 @@
+# TASK 1
+
+                        ┌─────────────┐
+                        │ Payment API │
+                        └─────────────┘
+                              ▲
+                              │ process payment
+                              │
+   ┌──────────┐   order    ┌──┴─────────┐   send notification   ┌──────────────────┐
+   │  Coffee  │───────────►│ RotaCoffee │──────────────────────►│ Push Notification│
+   │  Drinker │◄───────────│   System   │                       │     Service      │
+   └──────────┘  confirm   └──┬──────┬──┘                       └──────────────────┘
+                              │      │
+                 manage orders│      │ onboard shops
+                              ▼      ▼
+                     ┌──────────┐  ┌──────────┐
+                     │  Barista │  │  Admin   │
+                     └──────────┘  └──────────┘
+
+
+
+# TASK 2 
+
+
+   ┌──────────────┐        ┌──────────────┐
+   │  Mobile App  │        │ Shop Dashboard│
+   │ menu,cart,pay│        │ orders, Ready │
+   └──────┬───────┘        └───────┬───────┘
+          │                        │
+          └───────────┬────────────┘
+                      ▼
+              ┌───────────────┐
+              │  REST API     │
+              │ auth, orders, │
+              │ payment logic │
+              └───────┬───────┘
+                      │
+        ┌─────────────┼─────────────┐
+        ▼             ▼             ▼
+   ┌─────────┐  ┌──────────┐  ┌──────────┐
+   │ Database│  │ Payment  │  │ Notifier │
+   │ users,  │  │ Gateway  │  │ "ready"  │
+   │ orders  │  │          │  │ push     │
+   └─────────┘  └──────────┘  └──────────┘
+
+
+
+# TASK 3
+
+Entities: 
+- User -> id, email, name
+- Shop -> id, name, address, owner_id
+- Menu Item -> id, shop_id, name, price, size_options
+- Order -> id, user_id, shop_id, status, total, created_at
+- OrderItem -> order_id, men_item_id, size, quantity
+- Payment -> id, order_id, status, provider_ref
+
+Relationships:
+- User   1 —— *  Order       
+- Shop   1 —— *  MenuItem     
+- Shop   1 —— *  Order        
+- Order  1 —— *  OrderItem    
+- Order  1 —— 1  Payment      
+- MenuItem 1 —— * OrderItem   
+
+
+# TASK 4 
+
+Decision: Flutter 
+Alternative: Native (Swift + Kotlin)
+Why: One codebase means faster, cheaper development. The trade-off is a slightly less native feel, but it's worth it for our MVP.
