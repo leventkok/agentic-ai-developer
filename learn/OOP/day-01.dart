@@ -27,8 +27,8 @@ int totalOrder() {
 // B section
 
 class OrderCoffee{
-    String coffeName;
-    int coffePrice;
+    String coffeeName;
+    int coffeePrice;
 
     OrderCoffee(this.coffeeName, this.coffeePrice);
 

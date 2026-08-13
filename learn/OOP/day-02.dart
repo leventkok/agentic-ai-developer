@@ -5,7 +5,7 @@ class User {
     final String email;
     final int age;
 
-    User(this.name, this.email, this.age);
+    User({required this.name, required this.email, required this.age});
 
     // TASK 3
     String describeUser(){
