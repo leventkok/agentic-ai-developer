@@ -1,0 +1,5 @@
+{
+    "shop_name": "MasterFabric Cafe",
+    "input_file": "data/orders.txt",
+    "output_file": "data/summary.json"
+  }

@@ -1,0 +1,9 @@
+{
+  "shop_name": "MasterFabric Cafe",
+  "total_words": 3,
+  "unique_words": 2,
+  "counts": {
+    "espresso": 1,
+    "latte": 2
+  }
+}
