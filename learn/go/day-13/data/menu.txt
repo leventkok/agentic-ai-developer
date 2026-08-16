@@ -1,0 +1,3 @@
+latte:45
+espresso:35
+filter:30
