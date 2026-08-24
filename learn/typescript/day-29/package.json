@@ -1,0 +1,22 @@
+{
+  "name": "day-29",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/app.ts",
+    "build": "tsc",
+    "bundle": "esbuild src/app.ts --bundle --platform=node --format=esm --outfile=dist/bundle.js",
+    "start": "node dist/app.js",
+    "start:bundle": "node dist/bundle.js"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.16",
+    "@types/node": "^26.2.0",
+    "esbuild": "^0.25.1",
+    "tsx": "^4.19.3",
+    "typescript": "^7.0.2"
+  }
+}

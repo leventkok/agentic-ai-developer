@@ -1,0 +1,14 @@
+{
+  "name": "day-27",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "build:lib": "tsc -p tsconfig.lib.json",
+    "start": "node dist/app.js"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "day-30",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/cjs/cli/app.js",
+  "module": "./dist/esm/cli/app.js",
+  "types": "./dist/esm/cli/app.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/cli/app.js",
+      "require": "./dist/cjs/cli/app.js",
+      "types": "./dist/esm/cli/app.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "tsx --tsconfig tsconfig.esm.json src/cli/app.ts",
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json && tsc-alias -p tsconfig.cjs.json && node -e \"require('fs').copyFileSync('scripts/cjs-package.json','dist/cjs/package.json')\"",
+    "start": "node dist/esm/cli/app.js",
+    "start:cjs": "node dist/cjs/cli/app.js"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "tsc-alias": "^1.9.2",
+    "tsx": "^4.19.3",
+    "typescript": "^7.0.2"
+  }
+}
