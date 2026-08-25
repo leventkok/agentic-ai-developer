@@ -1,0 +1,25 @@
+{
+  "name": "day-35-task-tracker",
+  "version": "1.0.0",
+  "description": "Typed task tracker library and CLI — Day 35 MVP",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "tasks": "./dist/cli/app.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx src/cli/app.ts",
+    "test": "node --import tsx --test tests/store.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "tsx": "^4.19.3",
+    "typescript": "^7.0.2"
+  }
+}
