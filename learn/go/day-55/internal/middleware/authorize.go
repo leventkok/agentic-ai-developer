@@ -1,0 +1,25 @@
+package middleware
+
+import (
+	"net/http"
+
+	"learn/go/day-55/internal/auth"
+	"learn/go/day-55/internal/handler"
+)
+
+func RequireRole(roles ...string) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			user, ok := handler.UserFromContext(r.Context())
+			if !ok {
+				writeAuthProblem(w, http.StatusUnauthorized, "authentication required")
+				return
+			}
+			if !auth.HasRole(user.Role, roles...) {
+				writeAuthProblem(w, http.StatusForbidden, "forbidden")
+				return
+			}
+			next.ServeHTTP(w, r)
+		})
+	}
+}

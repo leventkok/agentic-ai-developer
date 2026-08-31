@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package bookmarks.v1;
+
+option go_package = "learn/go/day-61/internal/gen/bookmarksv1;bookmarksv1";
+
+// Bookmark mirrors the domain bookmark for wire serialization practice.
+message Bookmark {
+  int32 id = 1;
+  optional int32 user_id = 2;
+  string title = 3;
+  string url = 4;
+  repeated string tags = 5;
+  string created_at = 6; // RFC3339 string for Day 61; timestamps come later
+  string updated_at = 7;
+}
+
+message CreateBookmarkRequest {
+  string title = 1;
+  string url = 2;
+  repeated string tags = 3;
+}
+
+message BookmarkList {
+  repeated Bookmark items = 1;
+}
