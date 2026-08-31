@@ -1,0 +1,92 @@
+openapi: 3.0.3
+info:
+  title: Bookmarks API
+  version: 0.1.0
+  description: REST contract for the bookmarks service (see api/proto for gRPC).
+
+paths:
+  /bookmarks:
+    get:
+      summary: List bookmarks
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create bookmark
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBookmark'
+      responses:
+        '201':
+          description: Created
+
+  /bookmarks/{id}:
+    get:
+      summary: Get bookmark by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not found
+    patch:
+      summary: Update bookmark
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Delete bookmark
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '204':
+          description: No content
+
+  /auth/register:
+    post:
+      summary: Register user
+      responses:
+        '201':
+          description: Created
+
+  /auth/login:
+    post:
+      summary: Login
+      responses:
+        '200':
+          description: Returns JWT
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    CreateBookmark:
+      type: object
+      required: [title, url]
+      properties:
+        title: { type: string }
+        url: { type: string, format: uri }
+        tags:
+          type: array
+          items: { type: string }

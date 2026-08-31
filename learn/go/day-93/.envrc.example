@@ -1,0 +1,2 @@
+# Optional direnv — copy to .envrc and run: direnv allow
+dotenv .env.example

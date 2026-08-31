@@ -1,0 +1,5 @@
+#!/bin/sh
+# Pre-commit hook — fast checks before commit
+set -e
+go test ./internal/domain/... ./internal/service/...
+gofmt -l . | grep -q . && echo "gofmt needed" && exit 1 || true

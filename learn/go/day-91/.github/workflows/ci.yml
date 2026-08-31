@@ -1,0 +1,53 @@
+name: day-81-ci
+
+on:
+  push:
+    paths:
+      - "learn/go/day-91/**"
+  pull_request:
+    paths:
+      - "learn/go/day-91/**"
+
+defaults:
+  run:
+    working-directory: learn/go/day-91
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: learn/go/day-91/go.mod
+          cache-dependency-path: learn/go/day-91/go.sum
+
+      - run: go test ./...
+      - run: go vet ./...
+      - run: go build ./...
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v6
+        with:
+          version: v1.62.2
+          working-directory: learn/go/day-91
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t bookmarks-api:ci .
+
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: learn/go/day-91/go.mod
+      - run: go test -tags=integration ./internal/httpapi/...
