@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package bookmarks.v1;
+
+option go_package = "learn/go/day-65/internal/gen/bookmarksv1;bookmarksv1";
+
+message Bookmark {
+  int32 id = 1;
+  int32 user_id = 2;
+  string title = 3;
+  string url = 4;
+  repeated string tags = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}
+
+message CreateBookmarkRequest {
+  string title = 1;
+  string url = 2;
+  repeated string tags = 3;
+}
+
+message BookmarkList {
+  repeated Bookmark items = 1;
+}
+
+message ListBookmarksRequest {}
+
+message GetBookmarkRequest {
+  int32 id = 1;
+}
+
+message DeleteBookmarkRequest {
+  int32 id = 1;
+}
+
+message DeleteBookmarkResponse {}
+
+// BookmarkService exposes bookmark operations over gRPC.
+service BookmarkService {
+  rpc ListBookmarks(ListBookmarksRequest) returns (BookmarkList);
+  rpc GetBookmark(GetBookmarkRequest) returns (Bookmark);
+  rpc CreateBookmark(CreateBookmarkRequest) returns (Bookmark);
+  rpc DeleteBookmark(DeleteBookmarkRequest) returns (DeleteBookmarkResponse);
+}
