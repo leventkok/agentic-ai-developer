@@ -1,0 +1,70 @@
+name: day-79-ci
+
+on:
+  push:
+    paths:
+      - "learn/go/day-79/**"
+  pull_request:
+    paths:
+      - "learn/go/day-79/**"
+
+defaults:
+  run:
+    working-directory: learn/go/day-79
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: learn/go/day-79/go.mod
+          cache-dependency-path: learn/go/day-79/go.sum
+
+      - name: Test
+        run: go test ./...
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Build
+        run: go build ./...
+
+      - name: Coverage
+        run: |
+          go test ./internal/service ./internal/repository/sqlite -coverprofile=coverage.out
+          go tool cover -func=coverage.out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage-day-79
+          path: learn/go/day-79/coverage.out
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: learn/go/day-79/go.mod
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: v1.62.2
+          working-directory: learn/go/day-79
+
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: learn/go/day-79/go.mod
+
+      - name: Integration tests
+        run: go test -tags=integration ./internal/httpapi/...

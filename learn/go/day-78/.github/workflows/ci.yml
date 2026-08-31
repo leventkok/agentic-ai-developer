@@ -1,0 +1,27 @@
+name: day-78-ci
+
+on:
+  push:
+    paths:
+      - "learn/go/day-78/**"
+  pull_request:
+    paths:
+      - "learn/go/day-78/**"
+
+defaults:
+  run:
+    working-directory: learn/go/day-78
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: learn/go/day-78/go.mod
+          cache-dependency-path: learn/go/day-78/go.sum
+
+      - name: Run tests
+        run: go test ./...
