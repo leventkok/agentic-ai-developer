@@ -1,0 +1,43 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  nats:
+    image: nats:2-alpine
+    ports:
+      - "4222:4222"
+
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+    environment:
+      PORT: "8080"
+      GRPC_PORT: "9090"
+      ENV: development
+      JWT_SECRET: dev-docker-secret-at-least-32-chars
+      DB_PATH: /tmp/bookmarks.db
+      REDIS_URL: redis://redis:6379/0
+      NATS_URL: nats://nats:4222
+      CACHE_TTL_SEC: "60"
+    depends_on:
+      - redis
+      - nats
+
+  worker:
+    build: .
+    entrypoint: ["/app/worker"]
+    environment:
+      ENV: development
+      DB_PATH: /tmp/bookmarks.db
+      NATS_URL: nats://nats:4222
+    depends_on:
+      - nats
+    volumes:
+      - api-data:/tmp
+
+volumes:
+  api-data:

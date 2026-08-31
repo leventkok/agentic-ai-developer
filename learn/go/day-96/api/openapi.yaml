@@ -1,0 +1,17 @@
+openapi: 3.0.3
+info:
+  title: Bookmarks API
+  version: 0.2.0
+paths:
+  /bookmarks:
+    get:
+      summary: List bookmarks
+      responses:
+        '200':
+          description: OK
+  /auth/login:
+    post:
+      summary: Login
+      responses:
+        '200':
+          description: JWT token
