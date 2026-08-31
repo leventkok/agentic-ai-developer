@@ -1,0 +1,12 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+    environment:
+      PORT: "8080"
+      GRPC_PORT: "9090"
+      ENV: development
+      JWT_SECRET: dev-docker-secret-at-least-32-chars
+      DB_PATH: /tmp/bookmarks.db

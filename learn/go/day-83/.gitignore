@@ -1,0 +1,6 @@
+*.exe
+*.db
+*.out
+coverage.out
+service.out
+sqlite.out

@@ -1,0 +1,11 @@
+.git
+.github
+*.md
+scripts/
+.env
+.env.example
+*.db
+*.exe
+*.out
+internal/gen/
+**/*_test.go
