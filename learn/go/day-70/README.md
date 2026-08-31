@@ -4,13 +4,11 @@
 
 Full quality suite: integration tests, golangci-lint, coverage gates, and CI template.
 
-## What changed from Day 67
+## What changed from Day 69
 
 | Day | Focus | Deliverable |
 |-----|-------|-------------|
-| 68 | Linting | `.golangci.yml` |
-| 69 | Coverage | Threshold in `scripts/verify-quality.ps1` |
-| 70 | **Capstone** | Hardened E2E + quality gate (see `CAPSTONE.md`) |
+| 70 | **Capstone** | Full quality gate + hardened E2E (see `CAPSTONE.md`) |
 
 ## Run tests
 
